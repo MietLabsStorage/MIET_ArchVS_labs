@@ -14,6 +14,7 @@
 #include <iostream>
 #include <cmath>
 #include <climits>
+#include <bitset>
 
 using namespace std;
 
@@ -34,24 +35,25 @@ using namespace std;
 вывода. Шестнадцатеричный формат вывода не предусматривает знака, то есть
 шестнадцатеричное представление знаковой переменной будет соответствовать её
 беззнаковой интерпретации.*/
-void task1(short x, short y)
+void task1(int x,int y)
 {
 	//http://cppstudio.com/post/319/
+	cout << x << "\t" << y << endl;
 	cout << endl << "---TASK 1---" << endl;
 	
 	cout << ">>X::\n";
 	cout << "Unsigned hex: " << hex << (unsigned short)x << endl;
-	//cout << "Binary x16:   " << bitset<16>(x) << endl;
+	cout << "Binary x16:   " << bitset<16>(x) << endl;
 	cout << "Unsigned dec: " << dec << (unsigned short)x << endl;
-	cout << "Signed dec:   " << dec << x << endl;
+	cout << "Signed dec:   " << dec << (signed)x << endl;
 	
 	cout << endl;
 	
 	cout << ">>Y::\n";
 	cout << "Unsigned hex: " << hex << (unsigned short)y << endl;
-	//cout << "Binary x16:   " << bitset<16>(y).to_string() << endl;
+	cout << "Binary x16:   " << bitset<16>(y) << endl;
 	cout << "Unsigned dec: " << dec << (unsigned short)y << endl;
-	cout << "Signed dec:   " << dec << y << endl;
+	cout << "Signed dec:   " << dec << (signed)y << endl;
 }
 
 /*Найдите и выпишите в отчёт минимальное и максимальное 16-
@@ -65,33 +67,33 @@ void task2()
 	
 	cout << ">>Unsigned short max::" << endl;
 	cout << "Unsigned hex: " << hex << (unsigned short)USHRT_MAX << endl;
-	//cout << "Binary x16:   " << bitset<16>(USHRT_MAX) << endl;
-	cout << "Unsigned dec: " << dec << (unsigned short)USHRT_MAX << endl;
-	cout << "Signed dec:   " << dec << USHRT_MAX << endl;
+	cout << "Binary x16:   " << bitset<16>(USHRT_MAX) << endl;
+	cout << "Unsigned dec: " << dec << (unsigned short )USHRT_MAX << endl;
+	cout << "Signed dec:   " << dec << (signed short)USHRT_MAX << endl;
 	
 	cout << endl;
 	
 	cout << ">>Signed short max::" << endl;
 	cout << "Unsigned hex: " << hex << (unsigned short)SHRT_MAX << endl;
-	//cout << "Binary x16:   " << bitset<16>(SHRT_MAX) << endl;
+	cout << "Binary x16:   " << bitset<16>(SHRT_MAX) << endl;
 	cout << "Unsigned dec: " << dec << (unsigned short)SHRT_MAX << endl;
-	cout << "Signed dec:   " << dec << SHRT_MAX << endl;
+	cout << "Signed dec:   " << dec << (signed short)SHRT_MAX << endl;
 	
 	cout << endl;
 	
 	cout << ">>Unsigned short min::" << endl;
 	cout << "Unsigned hex: " << hex << (unsigned short)0 << endl;
-	//cout << "Binary x16:   " << bitset<16>(0) << endl;
+	cout << "Binary x16:   " << bitset<16>(0) << endl;
 	cout << "Unsigned dec: " << dec << (unsigned short)0 << endl;
-	cout << "Signed dec:   " << dec << 0 << endl;
+	cout << "Signed dec:   " << dec << (signed short)0 << endl;
 	
 	cout << endl;
 	
 	cout << ">>Signed short min::" << endl;
 	cout << "Unsigned hex: " << hex << (unsigned short)SHRT_MIN << endl;
-	//cout << "Binary x16:   " << bitset<16>(SHRT_MIN) << endl;
+	cout << "Binary x16:   " << bitset<16>(SHRT_MIN) << endl;
 	cout << "Unsigned dec: " << dec << (unsigned short)SHRT_MIN << endl;
-	cout << "Signed dec:   " << dec << SHRT_MIN << endl;
+	cout << "Signed dec:   " << dec << (signed short)SHRT_MIN << endl;
 }
 
 /*Разработайте программу на языке C++, выполняющую над беззнаковыми шестнадцатибитными целыми числами следующие поразрядные операции
@@ -182,20 +184,17 @@ void task7()
 */
 
 int main()
-{
-	short x = (-1)*pow(2, 15);
-	short y = pow(2, 15);
-	
-	task1(x,y);
+{	
+	//task1(-pow(2, 15),pow(2, 15));
 	task2();
-	task3(0xFFEE,0x0001);
-	task3(0x000E,0x0003);
-	task4(0xFFEE,0x0001);
-	task4(0x000E,0x0003);
-	task5((signed short)0xF123);
-	task5((unsigned short)0xF123);
+	//task3(0xFFEE,0x0001);
+	//task3(0x000E,0x0003);
+	//task4(0xFFEE,0x0001);
+	//task4(0x000E,0x0003);
+	//task5((signed short)0xF123);
+	//task5((unsigned short)0xF123);
 	
-	task7();
+	//task7();
 
 	return 0;
 }
