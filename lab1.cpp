@@ -106,7 +106,7 @@ void task2()
 void task3(unsigned short x, unsigned short y)
 {
 	cout << endl << "---TASK 3---" << endl;
-	cout << ">> X^Y::\t dec: " << dec << (unsigned short)(x & y) << "\thex: " << hex << (unsigned short)(x & y) << endl;
+	cout << ">> X&Y::\t dec: " << dec << (unsigned short)(x & y) << "\thex: " << hex << (unsigned short)(x & y) << endl;
 	cout << ">> XvY::\t dec: " << dec << (unsigned short)(x | y) << "\thex: " << hex<< (unsigned short)(x | y) << endl;
 	cout << ">> X^Y::\t dec: " << dec << (unsigned short)(x ^ y) << "\thex: " << hex<< (unsigned short)(x ^ y) << endl;
 	cout << ">>  ~X::\t dec: " << dec << (unsigned short)(~x) << "\thex: " << hex << (unsigned short)(~x) << endl;
@@ -121,7 +121,7 @@ void task3(unsigned short x, unsigned short y)
 void task4(signed short x, signed short y)
 {
 	cout << endl << "---TASK 4---" << endl;
-	cout << ">> X^Y::\t dec: " << dec << (signed short)(x & y) << "\thex: " << hex << (signed short)(x & y) << endl;
+	cout << ">> X&Y::\t dec: " << dec << (signed short)(x & y) << "\thex: " << hex << (signed short)(x & y) << endl;
 	cout << ">> XvY::\t dec: " << dec << (signed short)(x | y) << "\thex: " << hex<< (signed short)(x | y) << endl;
 	cout << ">> X^Y::\t dec: " << dec << (signed short)(x ^ y) << "\thex: " << hex<< (signed short)(x ^ y) << endl;
 	cout << ">>  ~X::\t dec: " << dec << (signed short)(~x) << "\thex: " << hex << (signed short)(~x) << endl;
@@ -186,7 +186,7 @@ void task7()
 int main()
 {	
 	//task1(-pow(2, 15),pow(2, 15));
-	task2();
+	//task2();
 	//task3(0xFFEE,0x0001);
 	//task3(0x000E,0x0003);
 	//task4(0xFFEE,0x0001);
@@ -194,7 +194,7 @@ int main()
 	//task5((signed short)0xF123);
 	//task5((unsigned short)0xF123);
 	
-	//task7();
+	task7();
 
 	return 0;
 }
