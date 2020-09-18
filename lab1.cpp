@@ -35,25 +35,25 @@ using namespace std;
 вывода. Шестнадцатеричный формат вывода не предусматривает знака, то есть
 шестнадцатеричное представление знаковой переменной будет соответствовать её
 беззнаковой интерпретации.*/
-void task1(int x,int y)
+void task1(int32_t x,int32_t y)
 {
 	//http://cppstudio.com/post/319/
 	cout << x << "\t" << y << endl;
 	cout << endl << "---TASK 1---" << endl;
 	
 	cout << ">>X::\n";
-	cout << "Unsigned hex: " << hex << (unsigned short)x << endl;
+	cout << "Unsigned hex: " << hex << (uint16_t)x << endl;
 	cout << "Binary x16:   " << bitset<16>(x) << endl;
-	cout << "Unsigned dec: " << dec << (unsigned short)x << endl;
-	cout << "Signed dec:   " << dec << (signed)x << endl;
+	cout << "Unsigned dec: " << dec << (uint16_t)x << endl;
+	cout << "Signed dec:   " << dec << (int16_t)x << endl;
 	
 	cout << endl;
 	
 	cout << ">>Y::\n";
-	cout << "Unsigned hex: " << hex << (unsigned short)y << endl;
+	cout << "Unsigned hex: " << hex << (uint16_t)y << endl;
 	cout << "Binary x16:   " << bitset<16>(y) << endl;
-	cout << "Unsigned dec: " << dec << (unsigned short)y << endl;
-	cout << "Signed dec:   " << dec << (signed)y << endl;
+	cout << "Unsigned dec: " << dec << (uint16_t)y << endl;
+	cout << "Signed dec:   " << dec << (int16_t)y << endl;
 }
 
 /*Найдите и выпишите в отчёт минимальное и максимальное 16-
@@ -66,34 +66,34 @@ void task2()
 	cout << endl << "---TASK 2---" << endl;
 	
 	cout << ">>Unsigned short max::" << endl;
-	cout << "Unsigned hex: " << hex << (unsigned short)USHRT_MAX << endl;
+	cout << "Unsigned hex: " << hex << (uint16_t)USHRT_MAX << endl;
 	cout << "Binary x16:   " << bitset<16>(USHRT_MAX) << endl;
-	cout << "Unsigned dec: " << dec << (unsigned short )USHRT_MAX << endl;
-	cout << "Signed dec:   " << dec << (signed short)USHRT_MAX << endl;
+	cout << "Unsigned dec: " << dec << (uint16_t)USHRT_MAX << endl;
+	cout << "Signed dec:   " << dec << (int16_t)USHRT_MAX << endl;
 	
 	cout << endl;
 	
 	cout << ">>Signed short max::" << endl;
-	cout << "Unsigned hex: " << hex << (unsigned short)SHRT_MAX << endl;
+	cout << "Unsigned hex: " << hex << (uint16_t)SHRT_MAX << endl;
 	cout << "Binary x16:   " << bitset<16>(SHRT_MAX) << endl;
-	cout << "Unsigned dec: " << dec << (unsigned short)SHRT_MAX << endl;
-	cout << "Signed dec:   " << dec << (signed short)SHRT_MAX << endl;
+	cout << "Unsigned dec: " << dec << (uint16_t)SHRT_MAX << endl;
+	cout << "Signed dec:   " << dec << (int16_t)SHRT_MAX << endl;
 	
 	cout << endl;
 	
 	cout << ">>Unsigned short min::" << endl;
-	cout << "Unsigned hex: " << hex << (unsigned short)0 << endl;
+	cout << "Unsigned hex: " << hex << (uint16_t)0 << endl;
 	cout << "Binary x16:   " << bitset<16>(0) << endl;
-	cout << "Unsigned dec: " << dec << (unsigned short)0 << endl;
-	cout << "Signed dec:   " << dec << (signed short)0 << endl;
+	cout << "Unsigned dec: " << dec << (uint16_t)0 << endl;
+	cout << "Signed dec:   " << dec << (int16_t)0 << endl;
 	
 	cout << endl;
 	
 	cout << ">>Signed short min::" << endl;
-	cout << "Unsigned hex: " << hex << (unsigned short)SHRT_MIN << endl;
+	cout << "Unsigned hex: " << hex << (uint16_t)SHRT_MIN << endl;
 	cout << "Binary x16:   " << bitset<16>(SHRT_MIN) << endl;
-	cout << "Unsigned dec: " << dec << (unsigned short)SHRT_MIN << endl;
-	cout << "Signed dec:   " << dec << (signed short)SHRT_MIN << endl;
+	cout << "Unsigned dec: " << dec << (uint16_t)SHRT_MIN << endl;
+	cout << "Signed dec:   " << dec << (int16_t)SHRT_MIN << endl;
 }
 
 /*Разработайте программу на языке C++, выполняющую над беззнаковыми шестнадцатибитными целыми числами следующие поразрядные операции
@@ -103,31 +103,31 @@ void task2()
 – унарные ¬𝑥 (отрицание),neg(𝑥) (дополнение до двух, 𝑥 + neg(𝑥) = 2разрядность 𝑥);
 – 𝑥 ≪ 𝑦 (логический сдвиг влево), 𝑥 ≫ 𝑦 (логический сдвиг вправо)
 */
-void task3(unsigned short x, unsigned short y)
+void task3(int32_t x, int32_t y)
 {
 	cout << endl << "---TASK 3---" << endl;
-	cout << ">> X&Y::\t dec: " << dec << (unsigned short)(x & y) << "\thex: " << hex << (unsigned short)(x & y) << endl;
-	cout << ">> XvY::\t dec: " << dec << (unsigned short)(x | y) << "\thex: " << hex<< (unsigned short)(x | y) << endl;
-	cout << ">> X^Y::\t dec: " << dec << (unsigned short)(x ^ y) << "\thex: " << hex<< (unsigned short)(x ^ y) << endl;
-	cout << ">>  ~X::\t dec: " << dec << (unsigned short)(~x) << "\thex: " << hex << (unsigned short)(~x) << endl;
-	//cout << ">>neg(X)::\t dec: " << dec <<  << "\thex: " << hex <<  << endl;
-	cout << ">> X<<Y::\t dec: " << dec << (unsigned short)(x << y) << "\thex: " << hex << (unsigned short)(x << y) << endl;
-	cout << ">> X>>Y::\t dec: " << dec << (unsigned short)(x >> y) << "\thex: " << hex << (unsigned short)(x >> y) << endl;
+	cout << ">> X&Y::\t dec: " << dec << (uint16_t)(x & y) << "\thex: " << hex << (uint16_t)(x & y) << endl;
+	cout << ">> XvY::\t dec: " << dec << (uint16_t)(x | y) << "\thex: " << hex<< (uint16_t)(x | y) << endl;
+	cout << ">> X^Y::\t dec: " << dec << (uint16_t)(x ^ y) << "\thex: " << hex<< (uint16_t)(x ^ y) << endl;
+	cout << ">>  ~X::\t dec: " << dec << (uint16_t)(~x) << "\thex: " << hex << (uint16_t)(~x) << endl;
+	cout << ">>neg(X)::\t dec: " << dec << (uint16_t)(pow(2,16) - x) << "\thex: " << hex << (uint16_t)(pow(2,16) - x) << endl;
+	cout << ">> X<<Y::\t dec: " << dec << (uint16_t)(x << y) << "\thex: " << hex << (uint16_t)(x << y) << endl;
+	cout << ">> X>>Y::\t dec: " << dec << (uint16_t)(x >> y) << "\thex: " << hex << (uint16_t)(x >> y) << endl;
 }
 
 /*Измените в программе из задания 3 тип переменных на знаковый.
 Объясните изменение (или неизменность) результата.
 */
-void task4(signed short x, signed short y)
+void task4(int32_t x, int32_t y)
 {
 	cout << endl << "---TASK 4---" << endl;
-	cout << ">> X&Y::\t dec: " << dec << (signed short)(x & y) << "\thex: " << hex << (signed short)(x & y) << endl;
-	cout << ">> XvY::\t dec: " << dec << (signed short)(x | y) << "\thex: " << hex<< (signed short)(x | y) << endl;
-	cout << ">> X^Y::\t dec: " << dec << (signed short)(x ^ y) << "\thex: " << hex<< (signed short)(x ^ y) << endl;
-	cout << ">>  ~X::\t dec: " << dec << (signed short)(~x) << "\thex: " << hex << (signed short)(~x) << endl;
-	//cout << ">>neg(X)::\t dec: " << dec <<  << "\thex: " << hex <<  << endl;
-	cout << ">> X<<Y::\t dec: " << dec << (signed short)(x << y) << "\thex: " << hex << (signed short)(x << y) << endl;
-	cout << ">> X>>Y::\t dec: " << dec << (signed short)(x >> y) << "\thex: " << hex << (signed short)(x >> y) << endl;
+	cout << ">> X&Y::\t dec: " << dec << (int16_t)(x & y) << "\thex: " << hex << (int16_t)(x & y) << endl;
+	cout << ">> XvY::\t dec: " << dec << (int16_t)(x | y) << "\thex: " << hex<< (int16_t)(x | y) << endl;
+	cout << ">> X^Y::\t dec: " << dec << (int16_t)(x ^ y) << "\thex: " << hex<< (int16_t)(x ^ y) << endl;
+	cout << ">>  ~X::\t dec: " << dec << (int16_t)(~x) << "\thex: " << hex << (int16_t)(~x) << endl;
+	cout << ">>neg(X)::\t dec: " << dec << (int16_t)(pow(2,16) - x) << "\thex: " << hex << (int16_t)(pow(2,16) - x) << endl;
+	cout << ">> X<<Y::\t dec: " << dec << (int16_t)(x << y) << "\thex: " << hex << (int16_t)(x << y) << endl;
+	cout << ">> X>>Y::\t dec: " << dec << (int16_t)(x >> y) << "\thex: " << hex << (int16_t)(x >> y) << endl;
 }
 
 /*
@@ -136,15 +136,15 @@ void task4(signed short x, signed short y)
 – знаковые (signed);
 – беззнаковые (unsigned).
 */
-void task5(signed short x)
+void task5(int16_t x)
 {
 	cout << endl << "---TASK 5---" << endl;
-	cout << (signed short)x << " -> " << dec << "dec: " << (signed int)x << hex << "  hex: " << (signed int)x << endl;
+	cout << (int16_t)x << " -> " << dec << "dec: " << (int32_t)x << hex << "  hex: " << (int32_t)x << endl;
 }
-void task5(unsigned short x)
+void task5(uint16_t x)
 {
 	cout << endl << "---TASK 5---" << endl;
-	cout << (unsigned short)x << " -> " << dec << "dec: " << (unsigned int)x << hex << "  hex: " << (unsigned int)x << endl;
+	cout << (uint16_t)x << " -> " << dec << "dec: " << (uint32_t)x << hex << "  hex: " << (uint32_t)x << endl;
 }
 
 /*
@@ -185,14 +185,14 @@ void task7()
 
 int main()
 {	
-	//task1(-pow(2, 15),pow(2, 15));
-	//task2();
-	//task3(0xFFEE,0x0001);
-	//task3(0x000E,0x0003);
-	//task4(0xFFEE,0x0001);
-	//task4(0x000E,0x0003);
-	//task5((signed short)0xF123);
-	//task5((unsigned short)0xF123);
+	task1(-pow(2, 15),pow(2, 15));
+	task2();
+	task3(0xFFEE,0x0001);
+	task3(0x000E,0x0003);
+	task4(0xFFEE,0x0001);
+	task4(0x000E,0x0003);
+	task5((int16_t)0xF123);
+	task5((uint16_t)0xF123);
 	
 	task7();
 
