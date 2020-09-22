@@ -3,8 +3,26 @@
 #include <cmath>
 #include <climits>
 #include <bitset>
+#include <cstddef>
+#include <string>
 
 using namespace std;
+
+void showForTask_1_and_2(string showName, int32_t num)
+{
+	cout << ">>" << showName << "::\n";
+	cout << "Unsigned hex: " << hex << (uint16_t)num << endl;
+	cout << "Binary x16:   " << bitset<16>(num) << endl;
+	cout << "Unsigned dec: " << dec << (uint16_t)num << endl;
+	cout << "Signed dec:   " << dec << (int16_t)num << endl;
+}
+
+template<typename T> 
+void showForTask7(string typeName)
+{
+	cout << typeName << ":\t" << sizeof(T) << endl;
+}
+
 
 /*Задание 1. Изучите, как интерпретируется одна и та же область памяти, если
 она рассматривается как знаковое или беззнаковое число, а также как одно и то
@@ -25,22 +43,10 @@ using namespace std;
 беззнаковой интерпретации.*/
 void task1(int32_t x,int32_t y)
 {
-	//http://cppstudio.com/post/319/
 	cout << endl << "---TASK 1---" << endl;
-	
-	cout << ">>X::\n";
-	cout << "Unsigned hex: " << hex << (uint16_t)x << endl;
-	cout << "Binary x16:   " << bitset<16>(x) << endl;
-	cout << "Unsigned dec: " << dec << (uint16_t)x << endl;
-	cout << "Signed dec:   " << dec << (int16_t)x << endl;
-	
+	showForTask_1_and_2("X", x);
 	cout << endl;
-	
-	cout << ">>Y::\n";
-	cout << "Unsigned hex: " << hex << (uint16_t)y << endl;
-	cout << "Binary x16:   " << bitset<16>(y) << endl;
-	cout << "Unsigned dec: " << dec << (uint16_t)y << endl;
-	cout << "Signed dec:   " << dec << (int16_t)y << endl;
+	showForTask_1_and_2("Y", y);
 }
 
 /*Найдите и выпишите в отчёт минимальное и максимальное 16-
@@ -49,38 +55,14 @@ void task1(int32_t x,int32_t y)
 */
 void task2()
 {
-	//http://cppstudio.com/cat/309/317/
 	cout << endl << "---TASK 2---" << endl;
-	
-	cout << ">>Unsigned short max::" << endl;
-	cout << "Unsigned hex: " << hex << (uint16_t)USHRT_MAX << endl;
-	cout << "Binary x16:   " << bitset<16>(USHRT_MAX) << endl;
-	cout << "Unsigned dec: " << dec << (uint16_t)USHRT_MAX << endl;
-	cout << "Signed dec:   " << dec << (int16_t)USHRT_MAX << endl;
-	
+	showForTask_1_and_2("Unsigned short max", USHRT_MAX);
 	cout << endl;
-	
-	cout << ">>Signed short max::" << endl;
-	cout << "Unsigned hex: " << hex << (uint16_t)SHRT_MAX << endl;
-	cout << "Binary x16:   " << bitset<16>(SHRT_MAX) << endl;
-	cout << "Unsigned dec: " << dec << (uint16_t)SHRT_MAX << endl;
-	cout << "Signed dec:   " << dec << (int16_t)SHRT_MAX << endl;
-	
+	showForTask_1_and_2("Signed short max", SHRT_MAX);
 	cout << endl;
-	
-	cout << ">>Unsigned short min::" << endl;
-	cout << "Unsigned hex: " << hex << (uint16_t)0 << endl;
-	cout << "Binary x16:   " << bitset<16>(0) << endl;
-	cout << "Unsigned dec: " << dec << (uint16_t)0 << endl;
-	cout << "Signed dec:   " << dec << (int16_t)0 << endl;
-	
+	showForTask_1_and_2("Unsigned short min", 0);
 	cout << endl;
-	
-	cout << ">>Signed short min::" << endl;
-	cout << "Unsigned hex: " << hex << (uint16_t)SHRT_MIN << endl;
-	cout << "Binary x16:   " << bitset<16>(SHRT_MIN) << endl;
-	cout << "Unsigned dec: " << dec << (uint16_t)SHRT_MIN << endl;
-	cout << "Signed dec:   " << dec << (int16_t)SHRT_MIN << endl;
+	showForTask_1_and_2("Signed short min", SHRT_MIN);
 }
 
 /*Разработайте программу на языке C++, выполняющую над беззнаковыми шестнадцатибитными целыми числами следующие поразрядные операции
@@ -90,31 +72,20 @@ void task2()
 – унарные ¬𝑥 (отрицание),neg(𝑥) (дополнение до двух, 𝑥 + neg(𝑥) = 2разрядность 𝑥);
 – 𝑥 ≪ 𝑦 (логический сдвиг влево), 𝑥 ≫ 𝑦 (логический сдвиг вправо)
 */
-void task3(int32_t x, int32_t y)
-{
-	cout << endl << "---TASK 3---" << endl;
-	cout << ">> X&Y::\t dec: " << dec << (uint16_t)(x & y) << "\thex: " << hex << (uint16_t)(x & y) << endl;
-	cout << ">> X|Y::\t dec: " << dec << (uint16_t)(x | y) << "\thex: " << hex<< (uint16_t)(x | y) << endl;
-	cout << ">> X^Y::\t dec: " << dec << (uint16_t)(x ^ y) << "\thex: " << hex<< (uint16_t)(x ^ y) << endl;
-	cout << ">>  ~X::\t dec: " << dec << (uint16_t)(~x) << "\thex: " << hex << (uint16_t)(~x) << endl;
-	cout << ">> neg(X)::\t dec: " << dec << (uint16_t)(pow(2,16) - x) << "\thex: " << hex << (uint16_t)(pow(2,16) - x) << endl;
-	cout << ">> X<<Y::\t dec: " << dec << (uint16_t)(x << y) << "\thex: " << hex << (uint16_t)(x << y) << endl;
-	cout << ">> X>>Y::\t dec: " << dec << (uint16_t)(x >> y) << "\thex: " << hex << (uint16_t)(x >> y) << endl;
-}
-
 /*Измените в программе из задания 3 тип переменных на знаковый.
 Объясните изменение (или неизменность) результата.
 */
-void task4(int32_t x, int32_t y)
+template<typename T> 
+void task_3_4(T x, T y, int task)
 {
-	cout << endl << "---TASK 4---" << endl;
-	cout << ">> X&Y::\t dec: " << dec << (int16_t)(x & y) << "\thex: " << hex << (int16_t)(x & y) << endl;
-	cout << ">> X|Y::\t dec: " << dec << (int16_t)(x | y) << "\thex: " << hex<< (int16_t)(x | y) << endl;
-	cout << ">> X^Y::\t dec: " << dec << (int16_t)(x ^ y) << "\thex: " << hex<< (int16_t)(x ^ y) << endl;
-	cout << ">>  ~X::\t dec: " << dec << (int16_t)(~x) << "\thex: " << hex << (int16_t)(~x) << endl;
-	cout << ">> neg(X)::\t dec: " << dec << (int16_t)(pow(2,16) - x) << "\thex: " << hex << (int16_t)(pow(2,16) - x) << endl;
-	cout << ">> X<<Y::\t dec: " << dec << (int16_t)(x << y) << "\thex: " << hex << (int16_t)(x << y) << endl;
-	cout << ">> X>>Y::\t dec: " << dec << (int16_t)(x >> y) << "\thex: " << hex << (int16_t)(x >> y) << endl;
+	cout << endl << "---TASK " << task << "---" << endl;
+	cout << ">> X&Y::\t dec: " << dec << (T)(x & y) << "\thex: " << hex << (T)(x & y) << endl;
+	cout << ">> X|Y::\t dec: " << dec << (T)(x | y) << "\thex: " << hex<< (T)(x | y) << endl;
+	cout << ">> X^Y::\t dec: " << dec << (T)(x ^ y) << "\thex: " << hex<< (T)(x ^ y) << endl;
+	cout << ">>  ~X::\t dec: " << dec << (T)(~x) << "\thex: " << hex << (T)(~x) << endl;
+	cout << ">> neg(X)::\t dec: " << dec << (T)(pow(2,16) - x) << "\thex: " << hex << (T)(pow(2,16) - x) << endl;
+	cout << ">> X<<Y::\t dec: " << dec << (T)(x << y) << "\thex: " << hex << (T)(x << y) << endl;
+	cout << ">> X>>Y::\t dec: " << dec << (T)(x >> y) << "\thex: " << hex << (T)(x >> y) << endl;
 }
 
 /*
@@ -134,9 +105,24 @@ void task5(uint16_t x)
 	cout << (uint16_t)x << " -> " << dec << "dec: " << (uint32_t)x << hex << "  hex: " << (uint32_t)x << endl;
 }
 
-/*
-task 6
-*/
+
+template<typename T>
+void task6(const T &x)
+{
+	cout << endl << "---TASK 6---" << endl;
+	const unsigned char *p = reinterpret_cast<const unsigned char *>(&x);
+	cout << "Type: " << typeid(x).name() 
+	<< " Value: " << x << endl 
+	<< "Size: " << sizeof(x) << endl 
+	<< "Dump: " << hex << uppercase << setfill('0');
+	for(size_t i = 0; i < sizeof(x); ++i)
+	{
+		cout << setw(2)<< static_cast<unsigned>(*(p+i)) << " ";
+	}
+	cout << dec << endl << endl;
+ }
+
+
 
 
 
@@ -152,35 +138,33 @@ void*. Результаты оформите в отчёте в виде таб�
 void task7()
 {
 	cout << endl << "---TASK 7---" << endl;
-	cout << "char:        " << sizeof(char) << endl;
-	cout << "bool:        " << sizeof(bool) << endl;
-	cout << "wchar_t:     " << sizeof(wchar_t) << endl;
-	cout << "short:       " << sizeof(short) << endl;
-	cout << "int:         " << sizeof(int) << endl;
-	cout << "long:        " << sizeof(long) << endl;
-	cout << "long long:   " << sizeof(long long) << endl;
-	cout << "float:       " << sizeof(float) << endl;
-	cout << "double:      " << sizeof(double) << endl;
-	cout << "long double: " << sizeof(long double) << endl;
-	cout << "size_t:      " << sizeof(size_t) << endl;
-	cout << "ptrdiff_t:   " << sizeof(ptrdiff_t) << endl;
-	cout << "void*:       " << sizeof(void*) << endl;
+	showForTask7<char>("char");
+	showForTask7<bool>("bool");
+	showForTask7<wchar_t>("wchar_t");
+	showForTask7<short>("short");
+	showForTask7<int>("int");
+	showForTask7<long>("long");
+	showForTask7<long long>("long long");
+	showForTask7<float>("float");
+	showForTask7<double>("double");
+	showForTask7<long double>("long double");
+	showForTask7<size_t>("size_t");
+	showForTask7<ptrdiff_t>("ptrdiff_t");
+	showForTask7<void*>("void*");
 }
 
-/*
-*/
 
 int main()
 {	
 	task1(-pow(2, 15),pow(2, 15));
 	task2();
-	task3(0xFFEE,0x0001);
-	task3(0x000E,0x0003);
-	task4(0xFFEE,0x0001);
-	task4(0x000E,0x0003);
+	task_3_4<uint16_t>(0xFFEE,0x0001,3);
+	task_3_4<uint16_t>(0x000E,0x0003,3);
+	task_3_4<int16_t>(0xFFEE,0x0001,4);
+	task_3_4<int16_t>(0x000E,0x0003,4);
 	task5((int16_t)0xF123);
 	task5((uint16_t)0xF123);
-	
+	task6<int64_t>(0x12345678);
 	task7();
 
 	return 0;
