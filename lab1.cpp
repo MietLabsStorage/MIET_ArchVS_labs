@@ -1,15 +1,3 @@
-//CURENT PROBLEMS:
-//
-//in task1, task2 unwork bitset<16>
-//
-//iostream unwork with gcc (i use g++ now, but need read about this problem and dance with drums
-//
-//wtf is neg(x) in task3, task4, task5
-//
-//i dont done task 6, task8, task9
-//
-//
-
 #include <stdio.h> 
 #include <iostream>
 #include <cmath>
@@ -38,7 +26,6 @@ using namespace std;
 void task1(int32_t x,int32_t y)
 {
 	//http://cppstudio.com/post/319/
-	cout << x << "\t" << y << endl;
 	cout << endl << "---TASK 1---" << endl;
 	
 	cout << ">>X::\n";
@@ -107,10 +94,10 @@ void task3(int32_t x, int32_t y)
 {
 	cout << endl << "---TASK 3---" << endl;
 	cout << ">> X&Y::\t dec: " << dec << (uint16_t)(x & y) << "\thex: " << hex << (uint16_t)(x & y) << endl;
-	cout << ">> XvY::\t dec: " << dec << (uint16_t)(x | y) << "\thex: " << hex<< (uint16_t)(x | y) << endl;
+	cout << ">> X|Y::\t dec: " << dec << (uint16_t)(x | y) << "\thex: " << hex<< (uint16_t)(x | y) << endl;
 	cout << ">> X^Y::\t dec: " << dec << (uint16_t)(x ^ y) << "\thex: " << hex<< (uint16_t)(x ^ y) << endl;
 	cout << ">>  ~X::\t dec: " << dec << (uint16_t)(~x) << "\thex: " << hex << (uint16_t)(~x) << endl;
-	cout << ">>neg(X)::\t dec: " << dec << (uint16_t)(pow(2,16) - x) << "\thex: " << hex << (uint16_t)(pow(2,16) - x) << endl;
+	cout << ">> neg(X)::\t dec: " << dec << (uint16_t)(pow(2,16) - x) << "\thex: " << hex << (uint16_t)(pow(2,16) - x) << endl;
 	cout << ">> X<<Y::\t dec: " << dec << (uint16_t)(x << y) << "\thex: " << hex << (uint16_t)(x << y) << endl;
 	cout << ">> X>>Y::\t dec: " << dec << (uint16_t)(x >> y) << "\thex: " << hex << (uint16_t)(x >> y) << endl;
 }
@@ -122,10 +109,10 @@ void task4(int32_t x, int32_t y)
 {
 	cout << endl << "---TASK 4---" << endl;
 	cout << ">> X&Y::\t dec: " << dec << (int16_t)(x & y) << "\thex: " << hex << (int16_t)(x & y) << endl;
-	cout << ">> XvY::\t dec: " << dec << (int16_t)(x | y) << "\thex: " << hex<< (int16_t)(x | y) << endl;
+	cout << ">> X|Y::\t dec: " << dec << (int16_t)(x | y) << "\thex: " << hex<< (int16_t)(x | y) << endl;
 	cout << ">> X^Y::\t dec: " << dec << (int16_t)(x ^ y) << "\thex: " << hex<< (int16_t)(x ^ y) << endl;
 	cout << ">>  ~X::\t dec: " << dec << (int16_t)(~x) << "\thex: " << hex << (int16_t)(~x) << endl;
-	cout << ">>neg(X)::\t dec: " << dec << (int16_t)(pow(2,16) - x) << "\thex: " << hex << (int16_t)(pow(2,16) - x) << endl;
+	cout << ">> neg(X)::\t dec: " << dec << (int16_t)(pow(2,16) - x) << "\thex: " << hex << (int16_t)(pow(2,16) - x) << endl;
 	cout << ">> X<<Y::\t dec: " << dec << (int16_t)(x << y) << "\thex: " << hex << (int16_t)(x << y) << endl;
 	cout << ">> X>>Y::\t dec: " << dec << (int16_t)(x >> y) << "\thex: " << hex << (int16_t)(x >> y) << endl;
 }
