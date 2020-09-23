@@ -4,7 +4,9 @@
 #include <climits>
 #include <bitset>
 #include <cstddef>
+#include <iomanip>
 #include <string>
+
 
 using namespace std;
 
@@ -107,7 +109,7 @@ void task5(uint16_t x)
 
 
 template<typename T>
-void task6(const T &x)
+void task6_1(const T &x)
 {
 	cout << endl << "---TASK 6---" << endl;
 	const unsigned char *p = reinterpret_cast<const unsigned char *>(&x);
@@ -122,7 +124,24 @@ void task6(const T &x)
 	cout << dec << endl << endl;
  }
 
-
+template < typename T>
+ void task6_2(T * px, int CellCount)
+ {
+	 const unsigned char* p
+		 = reinterpret_cast<const unsigned char*>(px);
+	 size_t BytesCount = sizeof(*px) * CellCount;
+	
+		 cout << "Type: " << typeid(px).name()
+		 << " Value: " << px << endl
+		 << " Size: " << sizeof(px) << endl
+		 << "Dump: " << hex << uppercase << setfill('0');
+	
+		 for (size_t i = 0; i < BytesCount; ++i)
+		 {
+		 cout << setw(2) << static_cast<unsigned>(*(p + i)) << " ";
+		 }
+	 cout << dec << endl << endl;
+	 }
 
 
 
@@ -156,16 +175,31 @@ void task7()
 
 int main()
 {	
-	task1(-pow(2, 15),pow(2, 15));
-	task2();
-	task_3_4<uint16_t>(0xFFEE,0x0001,3);
-	task_3_4<uint16_t>(0x000E,0x0003,3);
-	task_3_4<int16_t>(0xFFEE,0x0001,4);
-	task_3_4<int16_t>(0x000E,0x0003,4);
-	task5((int16_t)0xF123);
-	task5((uint16_t)0xF123);
-	task6<int64_t>(0x12345678);
+	//task1(-pow(2, 15),pow(2, 15));
+	//task2();
+	//task_3_4<uint16_t>(0xFFEE,0x0001,3);
+	//task_3_4<uint16_t>(0x000E,0x0003,3);
+	//task_3_4<int16_t>(0xFFEE,0x0001,4);
+	//task_3_4<int16_t>(0x000E,0x0003,4);
+	//task5((int16_t)0xF123);
+	//task5((uint16_t)0xF123);
+	//task6<int64_t>(0x12345678);
 	task7();
+
+	
+	char* s_1 = (char*)"abcd";
+	char* s_2 = (char*)"абвг";
+
+	wchar_t* s_3 = (wchar_t*)"abcd";
+	wchar_t* s_4 = (wchar_t*)"абвг";
+
+	task6_1(0x12345678);
+	
+	task6_2(s_1, 5);
+	task6_2(s_2, 5);
+	task6_2(s_3, 5);
+	task6_2(s_4, 5);
+cout << "+++" << (int)'a';
 
 	return 0;
 }
