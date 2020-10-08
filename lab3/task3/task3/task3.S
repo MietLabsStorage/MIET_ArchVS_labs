@@ -7,7 +7,7 @@ main:
     push b
     call func
 
-    mov $0, %eax
+    xorl %eax, %eax
 ret
 
 
