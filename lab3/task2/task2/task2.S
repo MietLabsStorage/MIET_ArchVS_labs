@@ -1,20 +1,23 @@
 .data
-    msg: .string "%d mod 4 - 4 = %d\n"
+    msg: .string "%d %% 4 - %d  = %d\n"
     x: .int 13
 
-.global main
-main:
-    mov x, %rax
-    shr $2, %rax
-    shl $2, %rax
-    imul $-1, %rax
+.global _main
+_main:
+    mov x, %eax
+    shr $2, %eax
+    shl $2, %eax
+    imul $-1, %eax
 
+    push %eax
     push x
-    push %rax
+    push x
     push $msg
-    call printf
+    call _printf
 
-    addl $3*4, %esp
-    xor %rax, %rax
+    addl $4*4, %esp
+    xor %eax, %eax
 ret
+
+
 
