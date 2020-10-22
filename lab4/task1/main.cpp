@@ -4,7 +4,7 @@ int main()
 {
 	unsigned int a;
     unsigned int b;
-    unsigned int c = 0;
+    unsigned int c;
 	cout << "Operation a + b (unsigned)\n";
 	cout << "Please, enter number a:\n";
 	cin >> a;
@@ -14,8 +14,8 @@ int main()
 	cout << a << " + " << b << " = ";
 	asm
 	(
-        "movl %[a],%[c]\n\t"
-		"addl %[b],%[c]"
+        "mov %[a],%[c]\n\t"
+		"add %[b],%[c]"
 		: [c]"+r" (c)
         : [a]"r" (a), [b]"r"(b)
 		: "cc"
@@ -23,8 +23,8 @@ int main()
 
 	asm goto
 	(
-		"jc %l1"
-		:: [c]"r" (c)
+		"jc %l0"
+		::
 		: "cc"
 		: carry
 	);

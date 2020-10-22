@@ -10,11 +10,9 @@ int main()
 	cout << x  <<  " % 4 - " << x << " = " << endl;
     asm
     (
-    "mov %[x], %%eax \n\t"
-    "shr $2, %%eax \n\t"
-    "shl $2, %%eax \n\t"
-    "neg %%eax \n\t"
-    "mov %%eax, %[x]"
+    "shr $2, %[x]\n\t"
+    "shl $2, %[x]\n\t"
+    "neg %[x]\n\t"
     : [x]"+r"(x)
     :
     : "cc"
