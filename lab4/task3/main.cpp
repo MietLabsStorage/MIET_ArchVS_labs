@@ -10,8 +10,7 @@ int main()
 	cout << x  <<  " % 4 - " << x << " = " << endl;
     asm
     (
-    "shr $2, %[x]\n\t"
-    "shl $2, %[x]\n\t"
+    "and $-4, %[x]\n\t"
     "neg %[x]\n\t"
     : [x]"+r"(x)
     :

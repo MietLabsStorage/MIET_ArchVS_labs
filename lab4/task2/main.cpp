@@ -11,13 +11,14 @@ int main()
     asm
     (
     "mov %[x], %%eax \n\t"
-    "shr $2, %%eax \n\t"
-    "shl $2, %%eax \n\t"
+    "and $-4, %%eax\n\t"
+    //"shr $2, %%eax \n\t"
+    //"shl $2, %%eax \n\t"
     "neg %%eax \n\t"
     "mov %%eax, %[x]"
     : [x]"+r"(x)
     :
-    : "cc"
+    : "cc", "%eax"
     );
 
 	cout << x << endl;
