@@ -1,5 +1,4 @@
 #include <iostream>
-#include <math.h>
 
 using namespace std;
 
@@ -24,5 +23,6 @@ int main()
     :[X]"m"(x), [A]"m"(a)
     :"cc"
     );
+    cout.precision(8);
     cout << "cos(" << x << "+" << "0.9*" << x << "*" << x << ")=" << y;
 }

@@ -1,7 +1,5 @@
 #include <iostream>
-
 using namespace std;
-
 int main()
 {
     cout << "a - b = ?" << endl;
@@ -9,7 +7,6 @@ int main()
     float a = 123456789;
     float b = 123456788;
     cout << "123456789 - 123456788 = " << a-b << endl;
-
     a = 123456788;
     b = 123456787;
     cout << "123456788 - 123456787 = " << a-b << endl;
@@ -23,7 +20,6 @@ int main()
     double aa = 123456789;
     double bb = 123456788;
     cout << "123456789 - 123456788 = " << aa-bb << endl;
-
     a = 123456788;
     b = 123456787;
     cout << "123456788 - 123456787 = " << aa-bb << endl;
