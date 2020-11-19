@@ -16,10 +16,10 @@ int main()
     "fldl %[X]\n"       //X
     "fmull %[X]\n"      //X*X
     "fmull %[A]\n"      //0.9*X*X
-    "fldl %[X]\n"       //2*X*X,    X
-    "faddp \n"           //2*X*X+X
-    "fcos\n"            //cos(2*X*X+X)
-    "fstpl %[Y]\n"      //Y=cos(2*X*X+X), стек FPU пуст
+    "fldl %[X]\n"       //0.9*X*X,    X
+    "faddp \n"          //0.9*X*X+X
+    "fcos\n"            //cos(0.9*X*X+X)
+    "fstpl %[Y]\n"      //Y=cos(0.9*X*X+X), stack FPU is empty
     :[Y]"=m"(y)
     :[X]"m"(x), [A]"m"(a)
     :"cc"
