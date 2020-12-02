@@ -9,26 +9,20 @@ int main()
 
     asm
     (
-    "fldl %[X]\n"
-
-    //"fist %%rax\n"          //аааа, надо типа double-вский x сравнить с 13
-    "fcmp %[N13], st(0)\n"      // я не помню как
-    "jge less13\n"          // тут должна быть проверка (сопроцессоровская)
-
-                            // if x < 13
+    "fldl %[X]\n"           // x
     "fldl %[N3]\n"          // 3,   X
     "fdivrp\n"              // x/3
     "fldl %[N1]\n"          // 1,   x/3
     "fsubp\n"               // 1-x/3
-    "jmp end_check\n"       // goto end_check
+    "fldl %[X]\n"           // x,  1-x/3
+    "fldl %[N1]\n"          // 1,   x,  1-x/3
+    "fsubp\n"               // 1-x, 1-x/3
+    "fldl %[X]\n"           // x, 1-x, 1-x/3
+    "fldl %[N13]\n"         // 13, x, 1-x, 1-x/3
+    "fsubp\n"               // 13-x, 1-x, 1-x/3
+    "fcmovnbe %st(1), %st(0)\n"
 
-
-    "less13: \n"            // if x >= 13
-    "fldl %[N1]\n"          // 1,   x
-    "fsubp\n"                 // 1-x
-                            // goto end_check
-
-    "end_check: \n"
+    //"end_check: \n"
     "fstpl %[Y]\n"
 
     : [Y]"=m"(y)
