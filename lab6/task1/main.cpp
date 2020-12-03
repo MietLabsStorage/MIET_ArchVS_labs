@@ -16,10 +16,10 @@ int main()
     "and $-2, %%eax\n"      // ..
     "sub %%eax, %%ecx\n"    // x%2*/
 
-    "movl %[X], %%eax\n"    //
+    "movl %[X], %%eax\n"    // ..
     "bt $0, %%eax\n"        // последний бит в числе определяет четность, bt - заносит в CF заданный бит из регистра
 
-    "jae zero_equal\n"       // if (x%2) == 0 goto zero_equal
+    "jae zero_equal\n"      // if (x%2) == 0 goto zero_equal
 
     "movl %[X], %%eax\n"    // ..
     "imull $3, %%eax\n"     // ..

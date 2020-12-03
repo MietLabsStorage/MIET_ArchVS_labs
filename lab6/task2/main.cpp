@@ -4,30 +4,40 @@ using namespace std;
 
 int main()
 {
-    double x = 10, y=0;
+    double x, y;
     double n1 = 1, n3 = 3, n13 = 13;
-
+    cout << "if x<13 then y=1-x/3 else y=1+x\n";
+    cout << "write x: ";
+    cin >> x;
     asm
     (
     "fldl %[X]\n"           // x
-    "fldl %[N3]\n"          // 3,   X
+    "fldl %[N13]\n"         // 13,   X
+    "fsubrp\n"              // x-13
+    "ftst\n"                // x-13 ? 0
+    "fstsw\n"               // store flags
+    "sahf\n"                // load flsgs
+    "fstpl %[Y]\n"          // stack is emty
+    "jnb else\n"
+
+    "fldl %[X]\n"           // x
+    "fldl %[N3]\n"          // 3,  x
     "fdivrp\n"              // x/3
     "fldl %[N1]\n"          // 1,   x/3
     "fsubp\n"               // 1-x/3
-    "fldl %[X]\n"           // x,  1-x/3
-    "fldl %[N1]\n"          // 1,   x,  1-x/3
-    "fsubp\n"               // 1-x, 1-x/3
-    "fldl %[X]\n"           // x, 1-x, 1-x/3
-    "fldl %[N13]\n"         // 13, x, 1-x, 1-x/3
-    "fsubp\n"               // 13-x, 1-x, 1-x/3
-    "fcmovnbe %st(1), %st(0)\n"
+    "jmp finally\n"
 
-    //"end_check: \n"
-    "fstpl %[Y]\n"
+    "else:\n"
+    "fldl %[X]\n"           // x
+    "fldl %[N1]\n"          // 1, x
+    "faddp\n"               // 1+x
+
+    "finally:\n"
+    "fstpl %[Y]\n"          // stack is emty
 
     : [Y]"=m"(y)
     : [X]"m"(x), [N1]"m"(n1), [N3]"m"(n3), [N13]"m"(n13)
-    : "cc"
+    :
     );
 
     cout << y << endl;
