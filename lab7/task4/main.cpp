@@ -31,30 +31,30 @@ int main()
     "movl $0, %%eax \n"
 
     "Begin: \n"
-    "cmpl %[N], %%eax \n"
+    "cmpl %[N], %%eax \n" //счетчик
     "je ExitNM \n"
 
     "movl %[b], %%ecx \n"
     "leal (%%ecx, %%eax, 8), %%ecx \n"
-    "leal (%%ecx, %%eax, 8), %%ecx \n"
+    "leal (%%ecx, %%eax, 8), %%ecx \n"  //пеемещаемя к след структуе
     "movl (%%ecx),%%ecx \n"
 
-    "cmpl %[K], %%ecx \n"
+    "cmpl %[K], %%ecx \n"  //сраниваем ключ
     "je lable \n"
     "incl %%eax \n"
 
     "jmp Begin \n"
 
-    "lable: \n"
+    "lable: \n" 
     "movl %[b], %%ecx \n"
     "leal (%%ecx, %%eax, 8), %%ecx \n"
     "leal 8(%%ecx, %%eax, 8), %%ecx \n"
     //"movl (%%ecx),%%ecx \n"
     //"movl %%ecx, %[Min] \n"
     //"fldl %[Min] \n"
-    "fldl (%%ecx) \n"
+    "fldl (%%ecx) \n"  //пихаем в стек
     "incl %%eax \n"
-    //-----------------------�
+    //-----------------------—
 
     "BeginSearchMin: \n"
     "cmpl %[N], %%eax \n"
