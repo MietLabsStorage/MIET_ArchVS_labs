@@ -7,10 +7,10 @@ using namespace std;
 int main()
 {
     srand(time(0));
-    long long N = 0;
+    int N = 0;
     cout << "Size of array:: ";
     cin >> N;
-    long long* a = new long long[N];
+    int* a = new int[N];
     cout << "Array:: ";
     for(int i = 0; i < N; i++)
     {
@@ -18,38 +18,37 @@ int main()
         cout << a[i] << " ";
     }
     cout << endl;
-    long long minElem = a[0];
+    int minElem;
 
     asm
     (
-    "mov $1, %%rax \n"  //counter
-    "mov %[a], %%rdx \n"  //записываем  адрес нулевого элемента в rdx, берем за основу как минимум начальный
-
-    "mov (%%rdx), %%rdx \n" //разыменовываем адрес, лежащий в rdx, и помещаем его значение в rdx
+    "movl $1, %%eax \n"         // счетчик
+    "movl %[a], %%edx \n"       // &a -> edx; edx - min
+    "movl (%%edx), %%edx \n"    // *(a+0) -> edx
 
     "Begin: \n"
-    "cmp %[N], %%rax \n"   //while  != N
+    "cmpl %[N], %%eax \n"       //while i != N
     "je End \n"
 
-    "mov %[a], %%rcx \n" //записываем адрес нулевого элемента в rcx
-    "lea (%%rcx, %%rax, 8), %%rcx \n"   // записываем в rcx  указатель на i элемент
-    "mov (%%rcx),%%rcx \n" //разыменовываем значение i  элемента
+    "movl %[a], %%ecx \n"                   // &a -> ecx
+    "leal (%%ecx, %%eax, 4), %%ecx \n"      // &(a+i*4) -> ecx
+    "movl (%%ecx),%%ecx \n"                 // *(a+i) -> ecx
 
-    "cmp %%rdx, %%rcx \n"   //сравниваем минимум со значением  i элемента (если  i элемент больше текущего минимального)
+    "cmpl %%edx, %%ecx \n"  // min ? *(a+i)
     "jnbe notMin \n"
 
-    "mov %%rcx, %%rdx \n" //если текущий минимум больше i элемента, то перезаписываем текущий минимальный элемент
+    "movl %%ecx, %%edx \n"  // min -> edx
 
     "notMin: \n"
-    "inc %%rax \n" //увеличиваем i на 1 и переходим к следующей итерации
+    "incl %%eax \n"         // i++
     "jmp Begin \n"
 
     "End: \n"
-    "mov %%rdx, %[MIN] \n"
+    "movl %%edx, %[MIN] \n"
 
     : [MIN]"+m" (minElem)
     : [a]"m"(a), [N]"m"(N)
-    : "cc", "%rax", "%rdx", "%rcx"
+    : "cc", "%eax", "%edx", "%ecx"
     );
 
     cout<<"Min element:: "<< minElem;

@@ -39,7 +39,7 @@ int main()
 
     cout << "Adress of beginning of array:: " << b << endl;
     for(int i = 0; i < ARR_SIZE; i++){
-        //cout << "Key of " << i << "-th element:: " << *(b.key+i) <<endl;
+        cout << "Key of " << i << "-th element:: " << (*(b+i)).key <<endl;
         //cout << "Value of " << i << "-th element:: " << *(b.value+i) <<endl;
     }
 

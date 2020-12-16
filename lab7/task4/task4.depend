@@ -1,6 +1,8 @@
 # depslib dependency file v1.0
-1584205420 source:c:\users\maksi\desktop\archvs\lab7\task4\main.cpp
+1608134567 source:c:\users\maksi\desktop\archvs\lab7\task4\main.cpp
 	<iostream>
+	<stdlib.h>
+	<time.h>
 
 1608117974 source:/home/laptev-ka/newAVS/ArchVS/lab7/task4/main.cpp
 	<iostream>
