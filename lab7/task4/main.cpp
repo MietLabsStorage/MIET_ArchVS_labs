@@ -12,12 +12,12 @@ struct Pair{
 int main()
 {
     srand(time(0));
-    int N;
+    long long N;
     cout << "Size of b:: ";
     cin>> N;
     struct Pair* b = new struct Pair[N] ;
     cout<<"Key:: ";
-    int k = 0;
+    long long k = 0;
     cin >> k;
     for (int i = 0; i < N; i++)
     {
@@ -27,85 +27,73 @@ int main()
     }
     cout << endl;
     double Min = -1;
+    long long f = 0;
     asm (
-    "movl $0, %%eax \n"
+    "mov $0, %%rax \n"
 
     "Begin: \n"
-    "cmpl %[N], %%eax \n" //счетчик
-    "je ExitNM \n"
+    "cmp %[N], %%rax \n" //если   N = rax перейти по метке(выйти из цикла)
+    "je searchMin \n"
 
-    "movl %[b], %%ecx \n"
-    "leal (%%ecx, %%eax, 8), %%ecx \n"
-    "leal (%%ecx, %%eax, 8), %%ecx \n"  //пеемещаемя к след структуе
-    "movl (%%ecx),%%ecx \n"
+    "mov %[b], %%rcx \n"
+    "lea (%%rcx, %%rax, 8), %%rcx \n"
+    "lea (%%rcx, %%rax, 8), %%rcx \n"  //перемещаемся к след структуре для сравнения ключа
+    "mov (%%rcx),%%rcx \n"
 
-    "cmpl %[K], %%ecx \n"  //сраниваем ключ
+
+    "cmp %[K], %%rcx \n"  //если ключ извне равен ключу в структуре, то переходим по метке
     "je lable \n"
-    "incl %%eax \n"
 
+    "inc %%rax \n" //увеличиваем счетчик и прыгаем в начало цикла
     "jmp Begin \n"
 
-    "lable: \n" 
-    "movl %[b], %%ecx \n"
-    "leal (%%ecx, %%eax, 8), %%ecx \n"
-    "leal 8(%%ecx, %%eax, 8), %%ecx \n"
-    //"movl (%%ecx),%%ecx \n"
-    //"movl %%ecx, %[Min] \n"
-    //"fldl %[Min] \n"
-    "fldl (%%ecx) \n"  //пихаем в стек
-    "incl %%eax \n"
-    //-----------------------—
+    "lable: \n"
+    "mov %[b], %%rcx \n"
+    "lea (%%rcx, %%rax, 8), %%rcx \n"
+    "lea 8(%%rcx, %%rax, 8), %%rcx \n" //берем адрес вещественного числа
+    "fldl (%%rcx) \n"  //кладем в стек
+    "inc %%rax \n" //увеличиваем счетчик цикла
+    "add $1, %[F]\n" //увеличиваем счетчик количества элементов в стеке
+    "jmp Begin \n" //переходим в начало цикла
 
-    "BeginSearchMin: \n"
-    "cmpl %[N], %%eax \n"
-    "je ExitHM \n"
-    "movl %[b], %%ecx \n"
-    "leal (%%ecx, %%eax, 8), %%ecx \n"
-    "leal (%%ecx, %%eax, 8), %%ecx \n"
-    "movl (%%ecx),%%ecx \n"
 
-    "cmpl %[K], %%ecx \n"
-    "jne CONTINUESEARCH \n"
 
-    "movl %[b], %%ecx \n"
-    "leal (%%ecx, %%eax, 8), %%ecx \n"
-    "leal 8(%%ecx, %%eax, 8), %%ecx \n"
-    //"movl (%%ecx),%%ecx \n"
-    "fldl (%%ecx) \n"
-    "push %%ax \n"
-    "fcom \n"
-    "fnstsw \n"
-    //"fstpl %[Min] \n"
-    "sahf \n"
-    "pop %%ax \n"
-    "jc CHANGEMIN \n"
 
-    "fstpl %[Min] \n"
-    "jmp CONTINUESEARCH \n"
+    "searchMin: \n"
+    "cmp $0, %[F]\n"  //сравниваем количество чисел в стеке с 0
+    "je noKeys\n"
 
-    "CHANGEMIN: \n"
-    "fxch \n"
-    "fstpl %[Min] \n"
+    "cycle:\n"
+    "cmp $1, %[F]\n"  //сравниваем количество чисел в стеке с 1
+    "je minKey\n"
 
-    "CONTINUESEARCH: \n"
-    "incl %%eax \n"
-    "jmp BeginSearchMin \n"
+    "add $-1, %[F]\n"   //вычитаем 1 из счетчика количества элементов в стеке
+    "fcomi %%st(1), %%st(0)\n"//сравниваем числа, лежащие на верхушке стека
+    "jbe compare\n"//  st(0) < st(1)
+    "fstpl %[MIN]\n"
+    "jmp cycle\n"
+    "compare:\n"
+    "fxch\n"        //меняем местами st(1) st(0)  ( всегда на вершину стека кладем наименьший из 2 ух элементов на)
+    "fstpl %[MIN]\n" //выталкиваем st(0)
+    "jmp cycle\n"// возващаемся в начало цикла
 
-    "ExitHM: \n"
-    "fstpl %[Min] \n"
+    "minKey:\n"
+    "fstpl %[MIN]\n"
 
-    "ExitNM: \n"
-    : [Min]"+m" (Min)
+    "noKeys:\n"
+
+    : [MIN]"=m" (Min), [F]"+r"(f)
     : [b]"m"(b), [N]"m"(N), [K]"m"(k)
-    : "cc", "%eax", "%ecx"
+    : "cc", "%rax", "%rcx", "%rdx"
     );
 
-    if(Min == -1){
+    /*if(Min == -1){
         cout<<"\nNo key = "<<k<<" elements\n";
     }
     else{
         cout<<"\nMinimum:"<<Min<<endl;
-    }
+    }*/
+    cout << Min << endl;
 
     return 0;
 }
