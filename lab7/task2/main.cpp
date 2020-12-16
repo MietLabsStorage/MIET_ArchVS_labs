@@ -7,10 +7,10 @@ using namespace std;
 int main()
 {
     srand(time(0));
-    int N = 0;
+    long long N = 0;
     cout << "Size of array:: ";
     cin >> N;
-    int* a = new int[N];
+    long long* a = new long long[N];
     cout << "Array:: ";
     for(int i = 0; i < N; i++)
     {
@@ -18,39 +18,41 @@ int main()
         cout << a[i] << " ";
     }
     cout << endl;
-    int minElem = a[0];
+    long long minElem = a[0];
+
     asm
     (
-    "movl $1, %%eax \n"  //counter
-    "movl %[a], %%edx \n"  //записываем  адрес? нулевого элемента в edx берем за основу как минимум начальный
-    "movl (%%edx), %%edx \n" //записываем значение 
+    "mov $1, %%rax \n"  //counter
+    "mov %[a], %%rdx \n"  //записываем  адрес нулевого элемента в rdx, берем за основу как минимум начальный
+
+    "mov (%%rdx), %%rdx \n" //разыменовываем адрес, лежащий в rdx, и помещаем его значение в rdx
 
     "Begin: \n"
-    "cmpl %[N], %%eax \n"   //while < N
+    "cmp %[N], %%rax \n"   //while  != N
     "je End \n"
 
-    "movl %[a], %%ecx \n"
-    "leal (%%ecx, %%eax, 4), %%ecx \n"   // записать адрес следующего элемента массива
-    "movl (%%ecx),%%ecx \n" //записать значение
+    "mov %[a], %%rcx \n" //записываем адрес нулевого элемента в rcx
+    "lea (%%rcx, %%rax, 8), %%rcx \n"   // записываем в rcx  указатель на i элемент
+    "mov (%%rcx),%%rcx \n" //разыменовываем значение i  элемента
 
-    "cmpl %%edx, %%ecx \n"   //проверка на минимум, если не выполняется, то прыгаем на лейбл и прибавляем счетчик
-    "jnbe lable \n"
+    "cmp %%rdx, %%rcx \n"   //сравниваем минимум со значением  i элемента (если  i элемент больше текущего минимального)
+    "jnbe notMin \n"
 
-    "movl %%ecx, %%edx \n" ///если меньше минимума, то записываем новый минимум в edx
+    "mov %%rcx, %%rdx \n" //если текущий минимум больше i элемента, то перезаписываем текущий минимальный элемент
 
-    "lable: \n"
-    "incl %%eax \n"
+    "notMin: \n"
+    "inc %%rax \n" //увеличиваем i на 1 и переходим к следующей итерации
     "jmp Begin \n"
 
     "End: \n"
-    "movl %%edx, %[MIN] \n"
+    "mov %%rdx, %[MIN] \n"
 
     : [MIN]"+m" (minElem)
     : [a]"m"(a), [N]"m"(N)
-    : "cc", "%eax", "%edx", "%ecx"
+    : "cc", "%rax", "%rdx", "%rcx"
     );
 
-    cout<<"Min element:: "<<minElem;
+    cout<<"Min element:: "<< minElem;
 
     return 0;
 }
