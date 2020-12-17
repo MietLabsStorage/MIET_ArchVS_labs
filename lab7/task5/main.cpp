@@ -7,16 +7,16 @@ int main()
     int N;
     cout << "Fibbonachi arr size:: ";
     cin >> N;
+    if(N <= 0){
+        cout << "Arr cant be less or equal zero-size";
+        return 0;
+    }
     int i;
     int first, second;
     int* arr = new int[N];
-    //int arr[N];
 
     asm
     (
-    "cmpl $0, %[N]\n"       // if N == 0
-    "jle end_check\n"
-
     "xorl %[I], %[I]\n"     // счетчик
 
     "begin_iteration: \n"
@@ -48,7 +48,6 @@ int main()
     "cmpl %[I], %[N]\n"                 // i ? N
     "jne begin_iteration\n"             // i <> N
 
-    "end_check:\n"
     : [I]"+r"(i), [F]"+r"(first), [S]"+r"(second)
     : [N]"r"(N), [ARR]"r"(arr)
     : "cc", "memory"

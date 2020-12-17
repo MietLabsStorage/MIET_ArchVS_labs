@@ -27,7 +27,6 @@ int main()
     }
     cout << endl;
 
-
     cout << "Size of array array int[" << ARR_SIZE << "]:: " << sizeof(a) <<endl;
     cout << endl;
 

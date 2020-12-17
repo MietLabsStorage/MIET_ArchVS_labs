@@ -10,6 +10,10 @@ int main()
     int N = 0;
     cout << "Size of array:: ";
     cin >> N;
+    if(N <= 0){
+        cout << "Arr cant be less or equal zero-size";
+        return 0;
+    }
     int* a = new int[N];
     cout << "Array:: ";
     for(int i = 0; i < N; i++)

@@ -15,6 +15,10 @@ int main()
     int N;
     cout << "Size of b:: ";
     cin >> N;
+    if(N <= 0){
+        cout << "Arr cant be less or equal zero-size";
+        return 0;
+    }
     struct Pair* b = new struct Pair[N] ;
     cout<<"Key:: ";
     int k = 0;
